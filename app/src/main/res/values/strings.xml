@@ -2,4 +2,6 @@
     <string name="app_name">sixteenDays</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_fragment">привет я 1 фрагмент</string>
+    <string name="second_fragment">Привет я 2 фрагмент</string>
 </resources>
