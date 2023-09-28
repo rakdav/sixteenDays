@@ -1,24 +1,15 @@
-package com.example.sixteendays
+package com.example.sixteendays.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-private fun Button.setOnClickListener(any: Any) {
-
-}
+import com.example.sixteendays.R
 
 /**
  * A simple [Fragment] subclass.
@@ -26,8 +17,8 @@ private fun Button.setOnClickListener(any: Any) {
  * create an instance of this fragment.
  */
 class ListweatherFragment : Fragment() {
-    private lateinit var navController:NavController
-    private lateinit var ToSecond:Button;
+    private lateinit var navController: NavController
+    private lateinit var ToSecond: Button;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,7 +32,7 @@ class ListweatherFragment : Fragment() {
         // Inflate the layout for this fragment
         var view= inflater.inflate(R.layout.fragment_listweather, container, false)
         ToSecond=view.findViewById(R.id.toSecond)
-        navController=Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
+        navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         ToSecond.setOnClickListener {
             navController.navigate(R.id.action_listweatherFragment_to_weatherDetailFragment)
         }
