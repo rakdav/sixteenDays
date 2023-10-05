@@ -6,7 +6,7 @@ data class City(
     @SerializedName("id") var id: Int,
     @SerializedName("name") var name: String,
     @SerializedName("coord") var coord: Coord,
-    @SerializedName("country") var country: Int,
+    @SerializedName("country") var country: String,
     @SerializedName("population") var population: Int,
     @SerializedName("timezone") var timezone: Int)
 

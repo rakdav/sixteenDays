@@ -30,10 +30,10 @@ class WeatherDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_weather_detail, container, false)
             ToList=view.findViewById(R.id.toFirst)
-            navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-            ToList.setOnClickListener {
-                navController.navigate(R.id.action_weatherDetailFragment_to_listweatherFragment)
-            }
+//            navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+//            ToList.setOnClickListener {
+//                navController.navigate(R.id.action_weatherDetailFragment_to_listweatherFragment)
+//            }
             return view
     }
 

@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.sixteendays.R
+import com.example.sixteendays.model.MainWeather
+import com.example.sixteendays.viewmodel.ListWeatherFragmentViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -18,7 +23,8 @@ import com.example.sixteendays.R
  */
 class ListweatherFragment : Fragment() {
     private lateinit var navController: NavController
-    private lateinit var ToSecond: Button;
+    private lateinit var ToSecond: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,11 +37,10 @@ class ListweatherFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view= inflater.inflate(R.layout.fragment_listweather, container, false)
-        ToSecond=view.findViewById(R.id.toSecond)
-        navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-        ToSecond.setOnClickListener {
-            navController.navigate(R.id.action_listweatherFragment_to_weatherDetailFragment)
-        }
+        var viewModelProvider= ViewModelProvider(this)[ListWeatherFragmentViewModel::class.java]
+        viewModelProvider.getWeather()
+        var  mainWeather: MutableLiveData<MainWeather?> =viewModelProvider.getMainweather()
+
         return view
     }
 
