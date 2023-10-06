@@ -15,7 +15,7 @@ class ListWeatherFragmentViewModel:ViewModel()
     fun getWeather(){
         var service: APIWeather = Common.retrofitService
         service.getWeather(
-            54.7, 20.5, 7,
+            54.7, 20.5,
             "443c1c3e63cf5d70eee6cd4cb67513e9",
             "metric",
             "ru"
@@ -31,6 +31,7 @@ class ListWeatherFragmentViewModel:ViewModel()
         })
     }
     fun getMainweather(): MutableLiveData<MainWeather?> {
+        getWeather()
         return mainWeather
     }
 

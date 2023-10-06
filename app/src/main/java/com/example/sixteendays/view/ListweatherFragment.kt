@@ -12,9 +12,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sixteendays.R
 import com.example.sixteendays.model.MainWeather
 import com.example.sixteendays.viewmodel.ListWeatherFragmentViewModel
+import com.example.sixteendays.databinding.FragmentListweatherBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -23,8 +26,9 @@ import com.example.sixteendays.viewmodel.ListWeatherFragmentViewModel
  */
 class ListweatherFragment : Fragment() {
     private lateinit var navController: NavController
-    private lateinit var ToSecond: Button
-
+    private var _binding: FragmentListweatherBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var adapter:WeatherAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,14 +39,25 @@ class ListweatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        var view= inflater.inflate(R.layout.fragment_listweather, container, false)
         var viewModelProvider= ViewModelProvider(this)[ListWeatherFragmentViewModel::class.java]
-        viewModelProvider.getWeather()
+        _binding = FragmentListweatherBinding.inflate(inflater, container, false)
+        val root:View=binding.root
+        val rvWeather:RecyclerView=binding.rvWeather
         var  mainWeather: MutableLiveData<MainWeather?> =viewModelProvider.getMainweather()
+        mainWeather.observe(viewLifecycleOwner){
+            adapter= activity?.let { it1 -> mainWeather.value?.let { it2 ->
+                WeatherAdapter(it1,
+                    it2.list)
+            } }!!
+            rvWeather.adapter=adapter
+            rvWeather.layoutManager=LinearLayoutManager(activity)
+        }
 
-        return view
+        return root
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

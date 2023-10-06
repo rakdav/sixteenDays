@@ -4,18 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ListweatherFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/first_fragment" />
-
-    <Button
-        android:id="@+id/toSecond"
-        android:layout_width="152dp"
-        android:layout_height="156dp"
-        android:layout_gravity="center"
-        android:text="Button" />
-
+        android:id="@+id/rvWeather"/>
 </FrameLayout>
