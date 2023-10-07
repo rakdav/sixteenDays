@@ -12,10 +12,10 @@ import retrofit2.Response
 class ListWeatherFragmentViewModel:ViewModel()
 {
     var mainWeather:MutableLiveData<MainWeather?> = MutableLiveData()
-    fun getWeather(){
+    fun getWeather(lon:Double,lat:Double){
         var service: APIWeather = Common.retrofitService
         service.getWeather(
-            54.7, 20.5,
+            lon, lat,
             "443c1c3e63cf5d70eee6cd4cb67513e9",
             "metric",
             "ru"
@@ -30,8 +30,8 @@ class ListWeatherFragmentViewModel:ViewModel()
             }
         })
     }
-    fun getMainweather(): MutableLiveData<MainWeather?> {
-        getWeather()
+    fun getMainweather(lon:Double,lat:Double): MutableLiveData<MainWeather?> {
+        getWeather(lon,lat)
         return mainWeather
     }
 
