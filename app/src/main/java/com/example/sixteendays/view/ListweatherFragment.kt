@@ -4,28 +4,25 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sixteendays.R
 import com.example.sixteendays.databinding.FragmentListweatherBinding
 import com.example.sixteendays.model.MainWeather
 import com.example.sixteendays.viewmodel.ListWeatherFragmentViewModel
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
+import com.google.gson.Gson
+
 
 
 /**
@@ -34,13 +31,9 @@ import com.google.android.gms.location.LocationRequest
  * create an instance of this fragment.
  */
 class ListweatherFragment : Fragment() {
-    private lateinit var navController: NavController
     private var _binding: FragmentListweatherBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter:WeatherAdapter
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
-    private lateinit var locationCallback: LocationCallback
     private var lat:Double=0.0
     private var lon:Double=0.0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +54,11 @@ class ListweatherFragment : Fragment() {
             adapter= activity?.let { it1 -> mainWeather.value?.let { it2 ->
                 WeatherAdapter(it1,
                     it2.list,WeatherAdapter.OnClickListener{it->
-                        Toast.makeText(activity,it.dt_txt.toString(),Toast.LENGTH_LONG).show()
-
+                        var bundle:Bundle=Bundle()
+                        var gson:Gson=Gson()
+                        var strWeather:String=gson.toJson(it)
+                        bundle.putSerializable("weather",strWeather)
+                        root.findNavController().navigate(R.id.action_listweatherFragment_to_weatherDetailFragment,bundle)
                     })
             } }!!
             rvWeather.adapter=adapter

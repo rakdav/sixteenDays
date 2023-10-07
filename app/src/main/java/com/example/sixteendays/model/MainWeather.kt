@@ -1,6 +1,7 @@
 package com.example.sixteendays.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MainWeather(
     @SerializedName("city") var city:City,

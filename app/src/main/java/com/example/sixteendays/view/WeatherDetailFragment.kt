@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.example.sixteendays.R
+import com.example.sixteendays.model.WeatherItem
+import com.google.gson.Gson
+import com.example.sixteendays.databinding.FragmentWeatherDetailBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -16,7 +17,6 @@ import com.example.sixteendays.R
  * create an instance of this fragment.
  */
 class WeatherDetailFragment : Fragment() {
-    private lateinit var ToList: Button
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +29,14 @@ class WeatherDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_weather_detail, container, false)
-            ToList=view.findViewById(R.id.toFirst)
+            var gson:Gson= Gson()
+            var weather:WeatherItem=gson.fromJson("weather",WeatherItem::class.java)
+
 //            navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 //            ToList.setOnClickListener {
 //                navController.navigate(R.id.action_weatherDetailFragment_to_listweatherFragment)
 //            }
-            return view
+        return view
     }
 
 
