@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -42,7 +43,10 @@ class ListweatherFragment : Fragment() {
         mainWeather.observe(viewLifecycleOwner){
             adapter= activity?.let { it1 -> mainWeather.value?.let { it2 ->
                 WeatherAdapter(it1,
-                    it2.list)
+                    it2.list,WeatherAdapter.OnClickListener{it->
+                        Toast.makeText(activity,it.dt_txt.toString(),Toast.LENGTH_LONG).show()
+
+                    })
             } }!!
             rvWeather.adapter=adapter
             rvWeather.layoutManager=LinearLayoutManager(activity)

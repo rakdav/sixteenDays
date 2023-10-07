@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sixteendays.databinding.WeatherItemLayoutBinding
 import com.example.sixteendays.model.WeatherItem
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Date
-
-class WeatherAdapter(private val context:Context,private val weatherList:MutableList<WeatherItem>):
+class WeatherAdapter(private val context:Context,private val weatherList:MutableList<WeatherItem>,private val onClickListener: OnClickListener):
     RecyclerView.Adapter<WeatherAdapter.WeatherItemViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherItemViewHolder {
@@ -23,6 +19,9 @@ class WeatherAdapter(private val context:Context,private val weatherList:Mutable
     }
     override fun onBindViewHolder(holder: WeatherItemViewHolder, position: Int) {
         var weatherItem=weatherList[position]
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(weatherItem)
+        }
         holder.bind(weatherItem)
     }
     inner  class WeatherItemViewHolder(weatherItemLayoutBinding: WeatherItemLayoutBinding)
@@ -34,5 +33,8 @@ class WeatherAdapter(private val context:Context,private val weatherList:Mutable
             binding.tvTitle.text=weatherItem.dt_txt
             Picasso.get().load("https://openweathermap.org/img/w/"+weatherItem.weather[0].icon+".png").into(binding.ivFood);
         }
+    }
+    class OnClickListener(val clickListener: (weather: WeatherItem) -> Unit) {
+        fun onClick(weather: WeatherItem) = clickListener(weather)
     }
 }
