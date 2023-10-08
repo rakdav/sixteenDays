@@ -26,7 +26,6 @@ class ListWeatherFragmentViewModel:ViewModel()
                 mainWeather.value=weather
             }
             override fun onFailure(call: Call<MainWeather>, t: Throwable) {
-                var st:String=t.message.toString()
             }
         })
     }

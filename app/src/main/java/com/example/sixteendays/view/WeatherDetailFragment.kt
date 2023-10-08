@@ -30,7 +30,8 @@ class WeatherDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_weather_detail, container, false)
             var gson:Gson= Gson()
-            var weather:WeatherItem=gson.fromJson("weather",WeatherItem::class.java)
+            val json:String= arguments?.getString("weather") ?: ""
+            var weather:WeatherItem=gson.fromJson(json,WeatherItem::class.java)
 
 //            navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 //            ToList.setOnClickListener {

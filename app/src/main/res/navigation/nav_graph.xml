@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.sixteendays.view.ListweatherFragment"
+        android:name="com.example.sixteendays.view.ListWeatherFragment"
         android:label="fragment_listweather"
         tools:layout="@layout/fragment_listweather" >
         <action
